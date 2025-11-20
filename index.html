@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Manual de Usuario – Nube de Fuego Cocina</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #050505;
+      --bg-card: #111111;
+      --accent: #f5c842;
+      --accent-soft: #f7d96d;
+      --text: #f5f5f5;
+      --muted: #c0c0c0;
+      --border: #272727;
+      --danger: #ff5555;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, sans-serif;
+      background: radial-gradient(circle at top, #222 0, #050505 55%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .layout {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px 16px 60px;
+    }
+
+    header {
+      text-align: center;
+      padding: 24px 16px 12px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #151515, #090909);
+      box-shadow: 0 18px 35px rgba(0, 0, 0, 0.6);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(245, 200, 66, 0.18);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.9rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    header p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .tagline {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: var(--accent-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    nav {
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+    }
+
+    nav a {
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(245, 200, 66, 0.4);
+      color: var(--accent-soft);
+      text-decoration: none;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    nav a:hover {
+      background: rgba(245, 200, 66, 0.1);
+    }
+
+    main {
+      margin-top: 26px;
+      display: flex;
+      gap: 24px;
+    }
+
+    @media (max-width: 920px) {
+      main {
+        flex-direction: column;
+      }
+    }
+
+    .content {
+      flex: 3;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .sidebar {
+      flex: 1.1;
+      position: sticky;
+      top: 140px;
+      align-self: flex-start;
+      background: rgba(10, 10, 10, 0.9);
+      border-radius: 16px;
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 920px) {
+      .sidebar {
+        position: static;
+      }
+    }
+
+    .sidebar h3 {
+      margin: 4px 0 8px;
+      font-size: 0.95rem;
+      color: var(--accent-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0 0 10px;
+    }
+
+    .sidebar li {
+      margin-bottom: 6px;
+    }
+
+    .sidebar a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .sidebar a:hover {
+      color: var(--accent-soft);
+    }
+
+    .section {
+      background: rgba(10, 10, 10, 0.95);
+      border-radius: 18px;
+      padding: 18px 18px 20px;
+      border: 1px solid var(--border);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.65);
+    }
+
+    .section h2 {
+      margin-top: 0;
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent-soft);
+    }
+
+    .section h3 {
+      margin-top: 16px;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent-soft);
+    }
+
+    .section p {
+      margin: 6px 0;
+      font-size: 0.96rem;
+    }
+
+    .section ul {
+      padding-left: 20px;
+      margin: 6px 0;
+    }
+
+    .section li {
+      margin-bottom: 4px;
+    }
+
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .pill {
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(245, 200, 66, 0.4);
+      font-size: 0.8rem;
+      color: var(--accent-soft);
+    }
+
+    .note {
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border-left: 3px solid var(--accent-soft);
+      background: rgba(245, 200, 66, 0.06);
+      font-size: 0.9rem;
+      color: var(--accent-soft);
+    }
+
+    .warning {
+      border-left-color: var(--danger);
+      color: #ffaaaa;
+      background: rgba(255, 85, 85, 0.06);
+    }
+
+    .image-block {
+      margin-top: 14px;
+      margin-bottom: 6px;
+    }
+
+    .image-caption {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .image-frame {
+      border-radius: 14px;
+      border: 1px dashed rgba(245, 200, 66, 0.4);
+      padding: 8px;
+      background: radial-gradient(circle at top, #1b1b1b, #050505);
+    }
+
+    .image-frame img {
+      width: 100%;
+      max-height: 480px;
+      object-fit: contain; /* ideal para 1356x610 */
+      display: block;
+      border-radius: 10px;
+    }
+
+    .image-hint {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 4px;
+      text-align: right;
+      font-style: italic;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+      font-size: 0.9rem;
+    }
+
+    th,
+    td {
+      border: 1px solid var(--border);
+      padding: 6px 8px;
+      text-align: left;
+    }
+
+    th {
+      background: #2a210d;
+      color: var(--accent-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.85rem;
+    }
+
+    tr:nth-child(even) td {
+      background: #111111;
+    }
+
+    code {
+      font-family: "JetBrains Mono", Consolas, monospace;
+      font-size: 0.82rem;
+      background: #111;
+      padding: 2px 4px;
+      border-radius: 4px;
+    }
+
+    footer {
+      margin-top: 30px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <header>
+      <h1>Manual de Usuario – Nube de Fuego Cocina</h1>
+      <p>Guía rápida para el uso de la app de comandas en cocina</p>
+      <div class="tagline">Versión 1.1</div>
+      <nav>
+        <a href="#seccion1">¿Qué es?</a>
+        <a href="#seccion2">Inicio de sesión</a>
+        <a href="#seccion3">Ajustes / Servidor</a>
+        <a href="#seccion4">Preparación</a>
+        <a href="#seccion5">Menú principal</a>
+        <a href="#seccion6">Filtro por mesa</a>
+        <a href="#seccion7">Alarma</a>
+        <a href="#seccion9">Flujo de trabajo</a>
+        <a href="#seccion10">Problemas frecuentes</a>
+      </nav>
+    </header>
+
+    <main>
+      <div class="content">
+        <!-- 1 -->
+        <section id="seccion1" class="section">
+          <h2>1. ¿Qué es Nube de Fuego Cocina?</h2>
+          <p>
+            <strong>Nube de Fuego Cocina</strong> es una app para la cocina del
+            restaurante que muestra en tiempo real las comandas enviadas desde
+            la app <strong>NDF Saloneros</strong>.
+          </p>
+          <p>Con la app puedes:</p>
+          <ul>
+            <li>Ver los <strong>pedidos por mesa</strong>.</li>
+            <li>Ver <strong>cuánto tiempo</strong> lleva cada pedido en minutos.</li>
+            <li>Escuchar una <strong>alarma</strong> cuando entra un pedido nuevo.</li>
+            <li>Marcar pedidos como <strong>en preparación</strong> o <strong>preparados</strong>.</li>
+            <li>Ver la <strong>lista de pedidos listos</strong>.</li>
+            <li>
+              Ver los <strong>totales de productos</strong> a preparar (resumen
+              de cantidades).
+            </li>
+            <li><strong>Filtrar por mesa</strong>.</li>
+            <li>
+              Trabajar por <strong>tipo de preparación</strong>: comidas,
+              bebidas, etc.
+            </li>
+          </ul>
+          <p>
+            Está pensada para que la cocina vea todo claro, rápido y sin
+            meterse en temas técnicos.
+          </p>
+        </section>
+
+        <!-- 2 -->
+        <section id="seccion2" class="section">
+          <h2>2. Pantalla de inicio de sesión</h2>
+          <p>
+            Al abrir la app verás la pantalla con el logo de
+            <strong>Nube de Fuego Cocina</strong> y estos campos:
+          </p>
+          <ul>
+            <li><strong>Tipo de preparación</strong> (arriba)</li>
+            <li><strong>Usuario</strong></li>
+            <li><strong>Contraseña</strong></li>
+            <li>Botón <strong>INICIAR SESIÓN</strong></li>
+            <li>
+              Botones <strong>AJUSTES</strong> y <strong>POLÍTICA</strong> (abajo a la izquierda)
+            </li>
+          </ul>
+
+          <div class="image-block">
+            <p class="image-caption">
+              Figura 1. Pantalla de inicio de sesión
+            </p>
+            <div class="image-frame">
+              <!-- Reemplaza login.png por tu captura -->
+              <img
+                src="imagenes/login.png"
+                alt="Pantalla de inicio de sesión de Nube de Fuego Cocina"
+              />
+            </div>
+          </div>
+
+          <h3>2.1. Seleccionar tipo de preparación</h3>
+          <p>En el campo <strong>“Tipo preparación”</strong>:</p>
+          <ul>
+            <li>Toca el cuadro que dice “Seleccione tipo preparación”.</li>
+            <li>Elige el tipo que te corresponda, por ejemplo:</li>
+          </ul>
+          <div class="pill-list">
+            <span class="pill">Cocina</span>
+            <span class="pill">Barra / Bebidas</span>
+            <span class="pill">Plancha</span>
+            <span class="pill">Otra área configurada</span>
+          </div>
+          <p>
+            Esto sirve para que la app te muestre solo las comandas que le
+            corresponden a esa área de trabajo.
+          </p>
+
+          <h3>2.2. Usuario y contraseña</h3>
+          <ul>
+            <li>En <strong>Usuario</strong>, selecciona tu usuario de Nube de Fuego.</li>
+            <li>En <strong>Contraseña</strong>, escribe tu contraseña.</li>
+            <li>Luego toca <strong>INICIAR SESIÓN</strong>.</li>
+          </ul>
+          <p>
+            Estos usuarios los define el administrador del sistema
+            <strong>Nube de Fuego</strong>.
+          </p>
+        </section>
+
+        <!-- 3 -->
+        <section id="seccion3" class="section">
+          <h2>3. Configuración del servidor (botón AJUSTES)</h2>
+          <p>
+            Si la app no se conecta o es la primera vez que la usas, debes
+            configurar el servidor desde <strong>AJUSTES</strong>.
+          </p>
+          <ul>
+            <li>
+              En la pantalla de inicio de sesión, toca
+              <strong>AJUSTES</strong>.
+            </li>
+            <li>
+              Entrarás a la pantalla <strong>Configuración del App</strong>.
+              Verás:
+              <ul>
+                <li>Un botón <strong>ESCANEAR RED</strong>.</li>
+                <li>Un icono de <strong>computadora</strong> (modo local).</li>
+                <li>Un icono de <strong>nube</strong> (modo nube).</li>
+                <li>
+                  La línea <strong>“Servidor actual: …”</strong> con la dirección
+                  usada.
+                </li>
+              </ul>
+            </li>
+          </ul>
+
+          <div class="image-block">
+            <p class="image-caption">
+              Figura 2. Pantalla de configuración del App
+            </p>
+            <div class="image-frame">
+              <!-- Reemplaza ajustes.png por tu captura -->
+              <img
+                src="imagenes/ajustes.png"
+                alt="Pantalla de configuración del App - Ajustes"
+              />
+            </div>
+          </div>
+
+          <h3>3.1. Modo nube (pruebas / desarrollo)</h3>
+          <ul>
+            <li>Toca el icono de la <strong>nube</strong>.</li>
+            <li>
+              El servidor se configura para usar el servicio en la nube
+              (por ejemplo, <code>https://ndfsalonerosapi.azurewebsites.net</code>).
+            </li>
+            <li>
+              Regresa atrás (<strong>Volver</strong>) y en la pantalla de login
+              inicia sesión con:
+              <ul>
+                <li><strong>Usuario:</strong> Nube de Fuego</li>
+                <li><strong>Contraseña:</strong> N</li>
+              </ul>
+            </li>
+          </ul>
+          <p class="note warning">
+            Este modo es para <strong>pruebas y desarrolladores</strong>, no
+            para uso en el negocio real.
+          </p>
+
+          <h3>3.2. Modo local (restaurante real)</h3>
+          <ul>
+            <li>Toca el icono de la <strong>computadora</strong>.</li>
+            <li>
+              Se abrirá una ventana que dice
+              <strong>“INGRESE LA DIRECCIÓN IP DEL SERVIDOR LOCAL”</strong>
+              con cuatro cuadros.
+            </li>
+            <li>
+              Escribe la IP del servidor donde está instalado el API de Nube de
+              Fuego (por ejemplo <code>192.168.1.25</code>).
+            </li>
+            <li>Toca <strong>ACEPTAR</strong>.</li>
+            <li>
+              Verifica abajo que el texto de
+              <strong>“Servidor actual:”</strong> muestre ahora la IP local.
+            </li>
+            <li>
+              Vuelve a la pantalla de inicio de sesión e inicia con tu usuario
+              y contraseña reales del sistema.
+            </li>
+          </ul>
+          <p class="note">
+            El encargado de sistemas o soporte te indicará cuál es la
+            <strong>IP correcta</strong>.
+          </p>
+
+          <div class="image-block">
+            <p class="image-caption">
+              Figura 3. Ventana para ingresar IP del servidor local
+            </p>
+            <div class="image-frame">
+              <!-- Reemplaza ip-local.png por tu captura -->
+              <img
+                src="imagenes/ip-local.png"
+                alt="Ventana para ingresar IP del servidor local"
+              />
+            </div>
+          </div>
+        </section>
+
+        <!-- 4 -->
+        <section id="seccion4" class="section">
+          <h2>4. Pantalla principal: vista PREPARACIÓN</h2>
+          <p>
+            Luego de iniciar sesión, entras a la vista principal llamada
+            <strong>PREPARACIÓN</strong>.
+          </p>
+          <p>En esta pantalla verás:</p>
+          <ul>
+            <li>Varias <strong>columnas</strong>, una por cada pedido.</li>
+            <li>
+              En la parte superior de cada columna:
+              <ul>
+                <li>
+                  El número de <strong>minutos</strong> que lleva el pedido
+                  desde que se registró (por ejemplo: “7 minutos”).
+                </li>
+                <li>
+                  Color <strong>verde, amarillo o rojo</strong> (según el
+                  tiempo transcurrido).
+                </li>
+              </ul>
+            </li>
+            <li>
+              En la cabecera de cada pedido:
+              <ul>
+                <li>Mesa (ej. “MESA 4 AFUERA”)</li>
+                <li>Nombre del <strong>salonero</strong> que envió la comanda.</li>
+                <li>Número de orden.</li>
+              </ul>
+            </li>
+            <li>
+              Debajo, cada producto del pedido:
+              <ul>
+                <li>Nombre del plato o bebida.</li>
+                <li>Observaciones (sin chile, extra chips, etc.).</li>
+              </ul>
+            </li>
+          </ul>
+          <p>
+            A la derecha arriba siempre verás un
+            <strong>botón circular amarillo</strong> con tres líneas: es el
+            <strong>menú principal</strong>.
+          </p>
+
+          <div class="image-block">
+            <p class="image-caption">
+              Figura 4. Vista PREPARACIÓN con columnas de pedidos
+            </p>
+            <div class="image-frame">
+              <!-- Reemplaza preparacion.png por tu captura -->
+              <img
+                src="imagenes/preparacion.png"
+                alt="Vista de preparación con columnas de pedidos"
+              />
+            </div>
+          </div>
+        </section>
+
+        <!-- 5 -->
+        <section id="seccion5" class="section">
+          <h2>5. Menú principal dentro de la app</h2>
+          <p>
+            Al tocar el botón circular amarillo, se abre un menú lateral con las
+            opciones:
+          </p>
+          <div class="pill-list">
+            <span class="pill">TOTALES</span>
+            <span class="pill">LISTOS</span>
+            <span class="pill">PREPARACIÓN</span>
+            <span class="pill">CERRAR SESIÓN</span>
+            <span class="pill">LOGS</span>
+            <span class="pill">IDIOMA</span>
+          </div>
+
+          <div class="image-block">
+            <p class="image-caption">Figura 5. Menú lateral principal</p>
+            <div class="image-frame">
+              <!-- Reemplaza menu.png por tu captura -->
+              <img
+                src="imagenes/menu.png"
+                alt="Menú lateral con opciones Totales, Listos, Preparación, etc."
+              />
+            </div>
+          </div>
+
+          <h3>5.1. PREPARACIÓN</h3>
+          <p>
+            Es la vista por defecto. Muestra los pedidos que están
+            <strong>pendientes de preparar</strong> o en proceso. Desde aquí la
+            cocina ve qué tiene que hacer en cada momento.
+          </p>
+
+          <h3>5.2. LISTOS</h3>
+          <p>
+            Muestra los pedidos que ya fueron marcados como
+            <strong>preparados/listos</strong>. Sirve para que la cocina
+            verifique qué se ha entregado y qué ya está listo para que el
+            salonero lo retire.
+          </p>
+
+          <h3>5.3. TOTALES</h3>
+          <p>
+            Muestra una tabla con dos columnas: <strong>PRODUCTO</strong> y
+            <strong>CANTIDAD</strong>. Aquí se ven los totales de productos
+            pedidos en el período actual (por ejemplo, durante el turno).
+          </p>
+
+          <div class="image-block">
+            <p class="image-caption">
+              Figura 6. Vista TOTALES (resumen de productos)
+            </p>
+            <div class="image-frame">
+              <!-- Reemplaza totales.png por tu captura -->
+              <img
+                src="imagenes/totales.png"
+                alt="Tabla de totales de producto y cantidad"
+              />
+            </div>
+          </div>
+
+          <p>Ejemplo:</p>
+          <table>
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>CHULETA DE CERDO</td>
+                <td>1</td>
+              </tr>
+              <tr>
+                <td>ENSALADA VERDE</td>
+                <td>1</td>
+              </tr>
+              <tr>
+                <td>PAPAS FRITAS</td>
+                <td>1</td>
+              </tr>
+              <tr>
+                <td>EXTRA CHIPS PLÁTANO</td>
+                <td>2</td>
+              </tr>
+            </tbody>
+          </table>
+          <p>
+            Esta vista es muy útil para organizar la producción (por ejemplo,
+            cuántas chuletas o cuántas papas fritas se necesitan en total).
+          </p>
+
+          <h3>5.4. CERRAR SESIÓN</h3>
+          <p>
+            Cierra tu sesión en la app y te devuelve a la pantalla de login.
+            Úsalo cuando termines tu turno.
+          </p>
+
+          <h3>5.5. LOGS</h3>
+          <p>
+            Muestra información técnica de registros del sistema. Normalmente
+            solo lo usa soporte técnico.
+          </p>
+
+          <h3>5.6. IDIOMA</h3>
+          <p>
+            Permite cambiar el idioma de la app (si hay más de uno disponible).
+          </p>
+        </section>
+
+        <!-- 6 -->
+        <section id="seccion6" class="section">
+          <h2>6. Filtro por mesa</h2>
+          <p>
+            En la vista de preparación puedes ver, en algunos casos, un panel a
+            la izquierda con el título <strong>“Mesas”</strong> y botones con
+            números (por ejemplo, 4, 6, 8).
+          </p>
+          <div class="image-block">
+            <p class="image-caption">
+              Figura 7. Filtro por mesas (ejemplo 4, 6, 8)
+            </p>
+            <div class="image-frame">
+              <!-- Reemplaza mesas.png por tu captura -->
+              <img
+                src="imagenes/mesas.png"
+                alt="Panel de filtro por mesas en la vista de preparación"
+              />
+            </div>
+          </div>
+          <ul>
+            <li>
+              Si tocas un número de mesa, la app te muestra solo los pedidos de
+              esa mesa.
+            </li>
+            <li>
+              Si vuelves a tocar o seleccionas otra, cambiará el filtro.
+            </li>
+          </ul>
+          <p>
+            Esto es útil cuando una mesa tiene muchos platos y quieres
+            concentrarte solo en ella.
+          </p>
+        </section>
+
+        <!-- 7 -->
+        <section id="seccion7" class="section">
+          <h2>7. Alarma de pedidos nuevos</h2>
+          <p>
+            Cada vez que un salonero envía una comanda desde
+            <strong>NDF Saloneros</strong>:
+          </p>
+          <ul>
+            <li>
+              El pedido aparece en la vista <strong>PREPARACIÓN</strong>.
+            </li>
+            <li>
+              La app reproduce una <strong>alarma sonora</strong> durante los
+              primeros minutos.
+            </li>
+          </ul>
+          <p><strong>Recomendación:</strong></p>
+          <ul>
+            <li>Cuando escuches la alarma, mira la pantalla.</li>
+            <li>
+              Ubica el pedido que tiene pocos minutos (típicamente en color
+              verde).
+            </li>
+            <li>Empieza la preparación de ese pedido.</li>
+          </ul>
+        </section>
+
+        <!-- 8 -->
+        <section id="seccion8" class="section">
+          <h2>8. Marcar pedidos como preparados / uso de “Listos”</h2>
+          <p>
+            Según la configuración, los pedidos pueden cambiar de estado a
+            <strong>Preparado/Listo</strong> al interactuar con ellos (por
+            ejemplo, al tocarlos o mediante otra acción definida en la app).
+          </p>
+          <p>Una vez marcados como preparados:</p>
+          <ul>
+            <li>
+              Dejan de contarse como pendientes en
+              <strong>PREPARACIÓN</strong>.
+            </li>
+            <li>
+              Aparecen en la vista <strong>LISTOS</strong> del menú.
+            </li>
+          </ul>
+          <p class="note">
+            El flujo concreto (dónde tocar para marcar “preparado”) puede variar
+            según la versión, pero la idea es siempre la misma: cuando la cocina
+            termina, marca el pedido como <strong>listo</strong> para que el
+            salonero lo sepa.
+          </p>
+        </section>
+
+        <!-- 9 -->
+        <section id="seccion9" class="section">
+          <h2>9. Flujo de trabajo recomendado</h2>
+          <ol>
+            <li>
+              <strong>Iniciar sesión</strong>
+              <ul>
+                <li>Selecciona <strong>Tipo de preparación</strong>.</li>
+                <li>Ingresa usuario y contraseña.</li>
+              </ul>
+            </li>
+            <li>
+              <strong>Escuchar la alarma y revisar nuevos pedidos</strong>
+              <ul>
+                <li>Cuando suene, revisa la vista <strong>PREPARACIÓN</strong>.</li>
+              </ul>
+            </li>
+            <li>
+              <strong>Preparar los platos/bebidas</strong>
+              <ul>
+                <li>
+                  Sigue el orden de llegada o la prioridad que maneje tu
+                  negocio.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>Marcar pedidos como listos</strong>
+              <ul>
+                <li>
+                  Cuando termines, márcalos como preparados para que pasen a
+                  <strong>LISTOS</strong>.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>Consultar TOTALES cuando sea necesario</strong>
+              <ul>
+                <li>
+                  Usa <strong>TOTALES</strong> para ver cuántos productos de
+                  cada tipo se necesitan.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>Cerrar sesión al terminar el turno</strong>
+              <ul>
+                <li>Desde el menú, elige <strong>CERRAR SESIÓN</strong>.</li>
+              </ul>
+            </li>
+          </ol>
+        </section>
+
+        <!-- 10 -->
+        <section id="seccion10" class="section">
+          <h2>10. Problemas frecuentes y soluciones rápidas</h2>
+
+          <h3>10.1. No veo pedidos en la app</h3>
+          <ul>
+            <li>
+              Verifica que estás conectado a la
+              <strong>red correcta</strong> (modo local).
+            </li>
+            <li>
+              Revisa en <strong>AJUSTES</strong> que el
+              <strong>Servidor actual</strong> sea el correcto.
+            </li>
+            <li>
+              Confirma que los saloneros están usando la app
+              <strong>NDF Saloneros</strong> y enviando comandas.
+            </li>
+          </ul>
+
+          <h3>10.2. No suena la alarma de nuevos pedidos</h3>
+          <ul>
+            <li>Revisa el <strong>volumen</strong> del dispositivo.</li>
+            <li>
+              Asegúrate de que no esté en modo
+              <strong>silencio</strong> o “No molestar”.
+            </li>
+          </ul>
+
+          <h3>10.3. No me deja iniciar sesión</h3>
+          <ul>
+            <li>
+              Revisa que el usuario y contraseña estén bien escritos.
+            </li>
+            <li>
+              Confirma que elegiste el
+              <strong>Tipo de preparación</strong> correcto.
+            </li>
+            <li>
+              Si estás en un negocio real, asegúrate de que el modo sea
+              <strong>local</strong> y la IP esté bien.
+            </li>
+            <li>
+              Si el problema sigue, contacta al encargado o soporte.
+            </li>
+          </ul>
+        </section>
+
+        <footer>
+          Nube de Fuego Cocina &copy; <!-- Puedes agregar año aquí -->
+        </footer>
+      </div>
+
+      <aside class="sidebar">
+        <h3>Contenido</h3>
+        <ul>
+          <li><a href="#seccion1">1. ¿Qué es la app?</a></li>
+          <li><a href="#seccion2">2. Inicio de sesión</a></li>
+          <li><a href="#seccion3">3. Configuración del servidor</a></li>
+          <li><a href="#seccion4">4. Vista PREPARACIÓN</a></li>
+          <li><a href="#seccion5">5. Menú principal</a></li>
+          <li><a href="#seccion6">6. Filtro por mesa</a></li>
+          <li><a href="#seccion7">7. Alarma de pedidos</a></li>
+          <li><a href="#seccion8">8. Pedidos preparados</a></li>
+          <li><a href="#seccion9">9. Flujo de trabajo</a></li>
+          <li><a href="#seccion10">10. Problemas frecuentes</a></li>
+        </ul>
+        <h3>Consejo</h3>
+        <p>
+          Usa este documento también como guía impresa: puedes abrirlo en el
+          navegador y exportarlo a PDF para entregar a la cocina.
+        </p>
+      </aside>
+    </main>
+  </div>
+</body>
+</html>
